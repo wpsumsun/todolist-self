@@ -6,7 +6,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
   },
-  "homepage": "https://wpsumsun.github.io/todolist-self/build",
+  "homepage": "https://wpsumsun.github.io/todolist-self/build/",
   "devDependencies": {
     "react-scripts": "1.0.10"
   },
