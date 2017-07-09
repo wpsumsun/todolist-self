@@ -4,19 +4,23 @@ import 'normalize.css';
 import './reset.css';
 import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
+import * as localStore from './localStore'
+
 
 class App extends Component {
   constructor(props){
     super(props)
     this.state={
       newTodo:'',
-      todoLists:[]
+      todoLists: localStore.load('todoLists') || []
     }
   }
-
+  componentDidUpdate(){
+    localStore.save('todoLists',this.state.todoLists)
+  }
   addTodo(title){
       this.state.todoLists.push({
-        id:idMaker(),
+        id:this.idMaker(),
         title:title,
         status:null,
         deleted:false
@@ -44,6 +48,13 @@ class App extends Component {
     todo.deleted=true
     this.setState(this.state)
   }
+
+
+idMaker(){
+  let id=this.state.todoLists[this.state.todoLists.length-1].id || 0;
+  id+=1
+  return id
+}
 
   render(){
     let todos=this.state.todoLists.filter((item)=>!item.deleted).map((item)=>{
@@ -75,8 +86,4 @@ class App extends Component {
 
 export default App;
 
-let id=0;
-function idMaker(){
-  id+=1
-  return id
-}
+
