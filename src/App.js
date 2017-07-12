@@ -10,6 +10,7 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state={
+      user:{},
       newTodo:'',
       todoLists:[]
     }
@@ -67,7 +68,7 @@ idMaker(){
     })
     return(
       <div className="App">
-        <h1>我的待办</h1>
+        <h1>{this.state.user.username||'我'}的待办</h1>
         <div className="inputWrapper">
           <TodoInput
           content={this.state.newTodo}
@@ -77,9 +78,16 @@ idMaker(){
         <ol className="todoList">
           {todos}
         </ol>
-        <UserDialog/>
+        {this.state.user.id ? null:<UserDialog onSignUp={this.onSignUp.bind(this)}/>}
       </div> 
     )
+  }
+
+  onSignUp(user){
+    let stateCopy=JSON.parse(JSON.stringify(this.state))
+    stateCopy.user=user
+    this.setState(stateCopy)
+
   }
   
 }

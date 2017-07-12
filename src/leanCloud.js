@@ -21,7 +21,6 @@ export function  signUp(username,password,successFn,errorFn) {
   // user.setEmail();
   user.signUp().then(function (loginedUser) {
       let user=getUserFromAvUser(loginedUser)
-      console.log(user)
       successFn.call(null,user)
   }, function (error) {
       errorFn.call(null,error)
