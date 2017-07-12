@@ -28,6 +28,21 @@ export function  signUp(username,password,successFn,errorFn) {
 
 }
 
+
+export function getCurrentUser(){
+    var currentUser = AV.User.current();
+    if (currentUser) {
+      return getUserFromAvUser(currentUser)
+    }
+    else {
+      return
+    }
+}
+
+export function signOut(){
+  AV.User.logOut()
+}
+
 function getUserFromAvUser(AVUser){
   return {
     id:AVUser.id,
