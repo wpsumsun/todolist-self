@@ -29,6 +29,16 @@ export function  signUp(username,password,successFn,errorFn) {
 }
 
 
+export function signIn(username,password,successFn,errorFn){
+
+  AV.User.logIn(username, password).then(function (loginedUser) {
+      let user=getUserFromAvUser(loginedUser)
+      successFn.call(null,user)
+  }, function (error) {
+    errorFn.call(null,error)
+  })
+}
+
 export function getCurrentUser(){
     var currentUser = AV.User.current();
     if (currentUser) {
